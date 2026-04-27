@@ -19,7 +19,7 @@
     background: #ffffff;
     padding: 26px;
     border-radius: 22px;
-    width: 460px; /* MUCH wider */
+    width: 460px;
     box-shadow: 0 0 0 1px #e5e5e5;
   }
 
@@ -40,7 +40,6 @@
     flex-direction: column;
   }
 
-  /* VALUE BOX (top input) */
   .value-box {
     border: 1px solid #ddd;
     border-radius: 12px;
@@ -58,7 +57,6 @@
     color: #bbb;
   }
 
-  /* DROPDOWN */
   .column select {
     margin-top: 10px;
     padding: 12px;
@@ -79,7 +77,6 @@
 
   <div class="row">
 
-    <!-- LEFT -->
     <div class="column">
       <div class="value-box">
         <input id="inputValue" type="number" placeholder="Enter value">
@@ -87,7 +84,6 @@
       <select id="fromUnit"></select>
     </div>
 
-    <!-- RIGHT -->
     <div class="column">
       <div class="value-box">
         <input id="outputValue" type="text" readonly placeholder="—">
@@ -104,14 +100,18 @@ const units = {
   "Milliliters (ml)": 1,
   "Liters (l)": 1000,
 
-  "Teaspoon (tsp)": 5,
-  "Tablespoon (tbsp)": 15,
-  "Fluid ounce (fl oz)": 29.5735,
-  "Cup": 240,
+  "Teaspoon (tsp – Metric)": 5,
+  "Tablespoon (tbsp – Metric)": 15,
+  "Cup (Metric – 240 ml)": 240,
 
-  "Pint": 473,
-  "Quart": 946,
-  "Gallon": 3785
+  "Teaspoon (tsp – US)": 4.92892,
+  "Tablespoon (tbsp – US)": 14.7868,
+  "Cup (US – 236.6 ml)": 236.588,
+
+  "Fluid ounce (fl oz)": 29.5735,
+  "Pint": 473.176,
+  "Quart": 946.353,
+  "Gallon": 3785.41
 };
 
 const from = document.getElementById("fromUnit");
