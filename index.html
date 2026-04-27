@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cooking Converter</title>
+
+<style>
+  body {
+    font-family: Inter, sans-serif;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .widget {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 16px;
+    width: 260px;
+    box-shadow: 0 0 0 1px #eee;
+  }
+
+  input, select {
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+
+  .result {
+    margin-top: 12px;
+    font-weight: 600;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="widget">
+  <input id="inputValue" type="number" placeholder="Enter amount">
+
+  <select id="fromUnit">
+    <option value="cup">Cup</option>
+    <option value="tbsp">Tbsp</option>
+    <option value="tsp">Tsp</option>
+  </select>
+
+  <select id="toUnit">
+    <option value="ml">Milliliters</option>
+    <option value="cup">Cup</option>
+  </select>
+
+  <div class="result" id="result">Result: —</div>
+</div>
+
+<script>
+const conversion = {
+  cup: 240,
+  tbsp: 15,
+  tsp: 5
+};
+
+function convert() {
+  const value = parseFloat(document.getElementById("inputValue").value);
+  const from = document.getElementById("fromUnit").value;
+  const to = document.getElementById("toUnit").value;
+
+  if (!value) return;
+
+  let ml = value * conversion[from];
+
+  let result = to === "ml"
+    ? ml
+    : ml / conversion[to];
+
+  document.getElementById("result").innerText =
+    "Result: " + result.toFixed(2);
+}
+
+document.querySelectorAll("input, select")
+  .forEach(el => el.addEventListener("input", convert));
+</script>
+
+</body>
+</html>
