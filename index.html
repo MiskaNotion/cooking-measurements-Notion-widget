@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cooking Converter</title>
+<title>Volume Converter</title>
 
 <style>
   body {
@@ -17,23 +17,39 @@
 
   .widget {
     background: #ffffff;
-    padding: 16px;
+    padding: 18px;
     border-radius: 16px;
-    width: 260px;
-    box-shadow: 0 0 0 1px #eee;
+    width: 280px;
+    box-shadow: 0 0 0 1px #e5e5e5;
   }
 
-  input, select {
+  input {
     width: 100%;
-    margin-top: 8px;
-    padding: 8px;
-    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    outline: none;
+  }
+
+  .row {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  select {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
     border: 1px solid #ddd;
     font-size: 14px;
+    background: #fafafa;
   }
 
   .result {
-    margin-top: 12px;
+    margin-top: 14px;
+    font-size: 16px;
     font-weight: 600;
   }
 </style>
@@ -42,44 +58,58 @@
 <body>
 
 <div class="widget">
-  <input id="inputValue" type="number" placeholder="Enter amount">
+  <input id="inputValue" type="number" placeholder="Enter value">
 
-  <select id="fromUnit">
-    <option value="cup">Cup</option>
-    <option value="tbsp">Tbsp</option>
-    <option value="tsp">Tsp</option>
-  </select>
+  <div class="row">
+    <select id="fromUnit"></select>
+    <select id="toUnit"></select>
+  </div>
 
-  <select id="toUnit">
-    <option value="ml">Milliliters</option>
-    <option value="cup">Cup</option>
-  </select>
-
-  <div class="result" id="result">Result: —</div>
+  <div class="result" id="result">—</div>
 </div>
 
 <script>
-const conversion = {
-  cup: 240,
-  tbsp: 15,
-  tsp: 5
+const units = {
+  "Milliliters (ml)": 1,
+  "Liters (l)": 1000,
+
+  "Teaspoon (tsp)": 5,
+  "Tablespoon (tbsp)": 15,
+  "Fluid ounce (fl oz)": 29.5735,
+  "Cup": 240,
+
+  "Pint": 473,
+  "Quart": 946,
+  "Gallon": 3785,
+
+  "Cubic centimeter (cc)": 1,
+  "Cubic meter (m³)": 1000000
 };
+
+// populate dropdowns
+const from = document.getElementById("fromUnit");
+const to = document.getElementById("toUnit");
+
+Object.keys(units).forEach(unit => {
+  from.innerHTML += `<option>${unit}</option>`;
+  to.innerHTML += `<option>${unit}</option>`;
+});
+
+// default selection
+to.value = "Milliliters (ml)";
 
 function convert() {
   const value = parseFloat(document.getElementById("inputValue").value);
-  const from = document.getElementById("fromUnit").value;
-  const to = document.getElementById("toUnit").value;
-
   if (!value) return;
 
-  let ml = value * conversion[from];
+  const fromUnit = from.value;
+  const toUnit = to.value;
 
-  let result = to === "ml"
-    ? ml
-    : ml / conversion[to];
+  const ml = value * units[fromUnit];
+  const result = ml / units[toUnit];
 
   document.getElementById("result").innerText =
-    "Result: " + result.toFixed(2);
+    result.toFixed(2) + " " + toUnit;
 }
 
 document.querySelectorAll("input, select")
