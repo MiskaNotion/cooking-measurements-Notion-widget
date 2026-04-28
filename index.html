@@ -26,39 +26,7 @@
   .title {
     font-size: 14px;
     color: #777;
-    margin-bottom: 8px;
-  }
-
-  /* TOGGLE */
-  .mode-label {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 6px;
-  }
-
-  .toggle {
-    display: flex;
-    background: #f1f1f1;
-    border-radius: 999px;
-    padding: 4px;
     margin-bottom: 16px;
-  }
-
-  .toggle-option {
-    flex: 1;
-    text-align: center;
-    padding: 8px 0;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor: pointer;
-    color: #555;
-    transition: all 0.2s ease;
-  }
-
-  .toggle-option.active {
-    background: #fff;
-    color: #000;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
 
   .row {
@@ -98,6 +66,46 @@
     font-size: 14px;
     width: 100%;
   }
+
+  /* SMALL ELEGANT TOGGLE */
+  .toggle-wrap {
+    margin-top: 18px;
+  }
+
+  .toggle-label {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 6px;
+  }
+
+  .toggle {
+    display: inline-flex;
+    background: #f3f3f3;
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .toggle-option {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.2s ease;
+  }
+
+  .toggle-option.active {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  }
+
+  .helper-text {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 6px;
+  }
 </style>
 </head>
 
@@ -107,29 +115,36 @@
 
   <div class="title">Cooking Measurement Calculator</div>
 
-  <div class="mode-label">Measurement</div>
-
-  <div class="toggle">
-    <div class="toggle-option active" id="volumeBtn">Volume</div>
-    <div class="toggle-option" id="weightBtn">Weight</div>
-  </div>
-
   <div class="row">
 
     <div class="column">
       <div class="value-box">
-        <input id="inputValue" type="number" placeholder="Enter value">
+        <input id="inputValue" type="number" placeholder="Enter amount">
       </div>
       <select id="fromUnit"></select>
     </div>
 
     <div class="column">
       <div class="value-box">
-        <input id="outputValue" type="text" readonly placeholder="—">
+        <input id="outputValue" type="text" readonly placeholder="Result">
       </div>
       <select id="toUnit"></select>
     </div>
 
+  </div>
+
+  <!-- TOGGLE AT BOTTOM -->
+  <div class="toggle-wrap">
+    <div class="toggle-label">Measurement type</div>
+
+    <div class="toggle">
+      <div class="toggle-option active" id="volumeBtn">Volume</div>
+      <div class="toggle-option" id="weightBtn">Weight</div>
+    </div>
+
+    <div class="helper-text">
+      Volume = liquids (ml, cups) • Weight = solids (g, kg)
+    </div>
   </div>
 
 </div>
