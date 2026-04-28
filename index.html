@@ -26,7 +26,7 @@
   .title {
     font-size: 14px;
     color: #777;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   .row {
@@ -67,28 +67,23 @@
     width: 100%;
   }
 
-  /* SMALL ELEGANT TOGGLE */
+  /* CENTERED TOGGLE */
   .toggle-wrap {
-    margin-top: 18px;
-  }
-
-  .toggle-label {
-    font-size: 11px;
-    color: #999;
-    margin-bottom: 6px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
 
   .toggle {
-    display: inline-flex;
-    background: #f3f3f3;
+    display: flex;
+    background: #f2f2f2;
     border-radius: 999px;
-    padding: 3px;
-    gap: 2px;
+    padding: 4px;
   }
 
   .toggle-option {
-    padding: 6px 12px;
-    font-size: 12px;
+    padding: 6px 16px;
+    font-size: 13px;
     border-radius: 999px;
     cursor: pointer;
     color: #666;
@@ -96,15 +91,8 @@
   }
 
   .toggle-option.active {
-    background: #fff;
-    color: #000;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
-  }
-
-  .helper-text {
-    font-size: 11px;
-    color: #aaa;
-    margin-top: 6px;
+    background: #000;
+    color: #fff;
   }
 </style>
 </head>
@@ -133,17 +121,11 @@
 
   </div>
 
-  <!-- TOGGLE AT BOTTOM -->
+  <!-- CENTERED TOGGLE -->
   <div class="toggle-wrap">
-    <div class="toggle-label">Measurement type</div>
-
     <div class="toggle">
       <div class="toggle-option active" id="volumeBtn">Volume</div>
       <div class="toggle-option" id="weightBtn">Weight</div>
-    </div>
-
-    <div class="helper-text">
-      Volume = liquids (ml, cups) • Weight = solids (g, kg)
     </div>
   </div>
 
