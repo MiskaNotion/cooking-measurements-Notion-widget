@@ -26,7 +26,30 @@
   .title {
     font-size: 14px;
     color: #777;
+    margin-bottom: 10px;
+  }
+
+  /* TOGGLE */
+  .mode-toggle {
+    display: flex;
+    gap: 6px;
     margin-bottom: 14px;
+  }
+
+  .mode-toggle button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  .mode-toggle button.active {
+    background: #000;
+    color: #fff;
+    border-color: #000;
   }
 
   .row {
@@ -75,6 +98,12 @@
 
   <div class="title">Cooking Measurement Calculator</div>
 
+  <!-- NEW TOGGLE -->
+  <div class="mode-toggle">
+    <button id="volumeBtn" class="active">Volume</button>
+    <button id="weightBtn">Weight</button>
+  </div>
+
   <div class="row">
 
     <div class="column">
@@ -98,6 +127,7 @@
 <script>
 const units = {
   "Milliliters (ml)": 1,
+  "Deciliters (dl)": 100,
   "Liters (l)": 1000,
 
   "Teaspoon (tsp – Metric)": 5,
