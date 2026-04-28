@@ -26,30 +26,39 @@
   .title {
     font-size: 14px;
     color: #777;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   /* TOGGLE */
-  .mode-toggle {
+  .mode-label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 6px;
+  }
+
+  .toggle {
     display: flex;
-    gap: 6px;
-    margin-bottom: 14px;
+    background: #f1f1f1;
+    border-radius: 999px;
+    padding: 4px;
+    margin-bottom: 16px;
   }
 
-  .mode-toggle button {
+  .toggle-option {
     flex: 1;
-    padding: 8px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    background: #fafafa;
-    cursor: pointer;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 999px;
     font-size: 13px;
+    cursor: pointer;
+    color: #555;
+    transition: all 0.2s ease;
   }
 
-  .mode-toggle button.active {
-    background: #000;
-    color: #fff;
-    border-color: #000;
+  .toggle-option.active {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
 
   .row {
@@ -98,10 +107,11 @@
 
   <div class="title">Cooking Measurement Calculator</div>
 
-  <!-- NEW TOGGLE -->
-  <div class="mode-toggle">
-    <button id="volumeBtn" class="active">Volume</button>
-    <button id="weightBtn">Weight</button>
+  <div class="mode-label">Measurement</div>
+
+  <div class="toggle">
+    <div class="toggle-option active" id="volumeBtn">Volume</div>
+    <div class="toggle-option" id="weightBtn">Weight</div>
   </div>
 
   <div class="row">
@@ -125,7 +135,9 @@
 </div>
 
 <script>
-const units = {
+let mode = "volume";
+
+const volumeUnits = {
   "Milliliters (ml)": 1,
   "Deciliters (dl)": 100,
   "Liters (l)": 1000,
@@ -144,15 +156,31 @@ const units = {
   "Gallon": 3785.41
 };
 
+const weightUnits = {
+  "Grams (g)": 1,
+  "Kilograms (kg)": 1000,
+  "Ounces (oz)": 28.3495,
+  "Pounds (lb)": 453.592
+};
+
 const from = document.getElementById("fromUnit");
 const to = document.getElementById("toUnit");
 
-Object.keys(units).forEach(unit => {
-  from.innerHTML += `<option>${unit}</option>`;
-  to.innerHTML += `<option>${unit}</option>`;
-});
+function populateUnits() {
+  const units = mode === "volume" ? volumeUnits : weightUnits;
 
-to.value = "Milliliters (ml)";
+  from.innerHTML = "";
+  to.innerHTML = "";
+
+  Object.keys(units).forEach(unit => {
+    from.innerHTML += `<option>${unit}</option>`;
+    to.innerHTML += `<option>${unit}</option>`;
+  });
+
+  to.value = Object.keys(units)[0];
+}
+
+populateUnits();
 
 function smartRound(num) {
   if (num > 100) return Math.round(num);
@@ -168,14 +196,32 @@ function convert() {
     return;
   }
 
-  const ml = value * units[from.value];
-  const result = ml / units[to.value];
+  const units = mode === "volume" ? volumeUnits : weightUnits;
+
+  const base = value * units[from.value];
+  const result = base / units[to.value];
 
   document.getElementById("outputValue").value = smartRound(result);
 }
 
 document.querySelectorAll("input, select")
   .forEach(el => el.addEventListener("input", convert));
+
+document.getElementById("volumeBtn").onclick = () => {
+  mode = "volume";
+  document.getElementById("volumeBtn").classList.add("active");
+  document.getElementById("weightBtn").classList.remove("active");
+  populateUnits();
+  convert();
+};
+
+document.getElementById("weightBtn").onclick = () => {
+  mode = "weight";
+  document.getElementById("weightBtn").classList.add("active");
+  document.getElementById("volumeBtn").classList.remove("active");
+  populateUnits();
+  convert();
+};
 </script>
 
 </body>
