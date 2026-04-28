@@ -23,12 +23,6 @@
     box-shadow: 0 0 0 1px #e5e5e5;
   }
 
-  .title {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 18px;
-  }
-
   .row {
     display: flex;
     gap: 16px;
@@ -101,8 +95,6 @@
 
 <div class="widget">
 
-  <div class="title">Cooking Measurement Calculator</div>
-
   <div class="row">
 
     <div class="column">
@@ -121,7 +113,6 @@
 
   </div>
 
-  <!-- CENTERED TOGGLE -->
   <div class="toggle-wrap">
     <div class="toggle">
       <div class="toggle-option active" id="volumeBtn">Volume</div>
@@ -135,18 +126,22 @@
 let mode = "volume";
 
 const volumeUnits = {
+  // METRIC BASICS
   "Milliliters (ml)": 1,
   "Deciliters (dl)": 100,
   "Liters (l)": 1000,
 
-  "Teaspoon (tsp – Metric)": 5,
-  "Tablespoon (tbsp – Metric)": 15,
+  // METRIC COOKING
+  "Teaspoon (Metric)": 5,
+  "Tablespoon (Metric)": 15,
   "Cup (Metric – 240 ml)": 240,
 
-  "Teaspoon (tsp – US)": 4.92892,
-  "Tablespoon (tbsp – US)": 14.7868,
+  // US COOKING
+  "Teaspoon (US)": 4.92892,
+  "Tablespoon (US)": 14.7868,
   "Cup (US – 236.6 ml)": 236.588,
 
+  // LARGER VOLUME
   "Fluid ounce (fl oz)": 29.5735,
   "Pint": 473.176,
   "Quart": 946.353,
